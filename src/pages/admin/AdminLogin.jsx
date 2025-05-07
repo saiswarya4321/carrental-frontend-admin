@@ -37,7 +37,7 @@ function AdminLogin() {
         <Col md={6} lg={5}>
           <Card className={`shadow-lg border-0 rounded-4 ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
             <Card.Body className="p-5">
-              <h2 className="mb-4 text-center fw-bold">Admin Login</h2>
+              <h2 className="mb-4 text-center fw-bold"> Login</h2>
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
                   <Form.Label>Email</Form.Label>
