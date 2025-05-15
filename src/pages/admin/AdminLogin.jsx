@@ -11,7 +11,7 @@ function AdminLogin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { darkMode } = useTheme();
-
+const [loading, setLoading] = useState(false);
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
   axios.defaults.withCredentials = true;
 
@@ -19,6 +19,7 @@ function AdminLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await axios.post(`${baseUrl}/admin/login`, data, { withCredentials: true });
       localStorage.setItem('token', res.data.token);
@@ -27,6 +28,9 @@ function AdminLogin() {
     } catch (err) {
       alert(err.response?.data?.message || 'Invalid credentials');
     }
+    finally {
+    setLoading(false);
+  }
   };
 
   const inputClass = `form-control rounded-3 ${darkMode ? 'bg-secondary text-white border-0' : ''}`;
@@ -38,6 +42,8 @@ function AdminLogin() {
           <Card className={`shadow-lg border-0 rounded-4 ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
             <Card.Body className="p-5">
               <h2 className="mb-4 text-center fw-bold"> Login</h2>
+              {loading && <p className="text-center text-primary fw-semibold mb-3">Logging in... please wait</p>}
+
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
                   <Form.Label>Email</Form.Label>
